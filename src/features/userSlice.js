@@ -19,18 +19,15 @@ const initialState = {
 //   }
 // );
 
-export const mailSlice = createSlice({
-  name: 'mail',
-  initialState: { sendMessageIsOpen: false },
+export const userSlice = createSlice({
+  name: 'user',
+  initialState: { user: null },
   reducers: {
-    selectMail: (state, action) => {
-      state.selectedMail = action.payload;
+    login: (state, action) => {
+      state.user = action.payload;
     },
-    openSendMessage: (state) => {
-      state.sendMessageIsOpen = true;
-    },
-    closeSendMessage: (state) => {
-      state.sendMessageIsOpen = false;
+    logout: (state) => {
+      state.user = null;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -47,21 +44,20 @@ export const mailSlice = createSlice({
   // },
 });
 
-export const { selectMail, openSendMessage, closeSendMessage } =
-  mailSlice.actions;
+export const { login, logout } = userSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectsendMessageIsOpen = (state) => state.mail.sendMessageIsOpen;
-export const selectOpenMail = (state) => state.mail.selectedMail;
+
+export const selectUser = (state) => state.user.user;
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 // export const incrementIfOdd = (amount) => (dispatch, getState) => {
-//   const currentValue = selectMail(getState());
+//   const currentValue = selectuser(getState());
 //   if (currentValue % 2 === 1) {
 //     dispatch(incrementByAmount(amount));
 //   }
 // };
 
-export default mailSlice.reducer;
+export default userSlice.reducer;

@@ -2,13 +2,22 @@ import React from 'react';
 import './Header.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import TuneIcon from '@mui/icons-material/Tune';
 import AppsIcon from '@mui/icons-material/Apps';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar, Button, IconButton } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, selectUser } from './features/userSlice';
+import { auth } from './firebase';
 
 function Header() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const signOut = () => {
+    auth.signOut().then(() => {
+      dispatch(logout());
+    });
+  };
   return (
     <div className='header'>
       <div className='header__left'>
@@ -32,7 +41,12 @@ function Header() {
         <IconButton>
           <NotificationsIcon />
         </IconButton>
-        <Avatar />
+        <IconButton>
+          <Avatar src={user?.photoUrl} />
+        </IconButton>
+        <Button onClick={signOut} color='error'>
+          SIGN OUT
+        </Button>
       </div>
     </div>
   );
