@@ -1,4 +1,6 @@
-# Getting Started with Create React App and Redux
+# Gmail clone with React, redux, Firestore and MUI
+
+Gmail clone created with React js, Material UI, Redux and Firestore
 
 Websited hosted in firebase with url: https://email-c3789.web.app/
 
